@@ -1,0 +1,6 @@
+streamlit
+streamlit-geolocation
+astropy
+pyongc
+tqdm
+matplotlib
