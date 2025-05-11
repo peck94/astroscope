@@ -18,6 +18,10 @@ location_data = streamlit_geolocation()
 def get_common_names(dataframe):
     return [ongc.get(obj["name"]).identifiers[3] for _, obj in dataframe.iterrows()]
 
+@st.cache_data
+def load_data():
+    return data.all()
+
 def display_info(dso):
     common = dso.identifiers[3]
 
@@ -52,7 +56,7 @@ tab1, tab2 = st.tabs(["Overview", "Suggestions"])
 
 with tab1:
     with st.spinner("Loading catalog..."):
-        dataframe = data.all()[["name", "type", "const", "vmag"]].sort_values(by="vmag", ascending=True, na_position="last")
+        dataframe = load_data()[["name", "type", "const", "vmag"]].sort_values(by="vmag", ascending=True, na_position="last")
 
         constellations = sorted(set([obj["const"] for _, obj in dataframe.iterrows() if obj["const"]]))
         type_list = set([obj["type"] for _, obj in dataframe.iterrows() if obj["type"]])
