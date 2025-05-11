@@ -4,3 +4,4 @@ astropy
 pyongc
 tqdm
 matplotlib
+setuptools
